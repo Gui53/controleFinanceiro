@@ -1,4 +1,7 @@
 package principal;
+
+import visao.Menu;
+
 /**
  *
  * @author guilh
@@ -6,6 +9,9 @@ package principal;
 public class Principal {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Menu menu = new Menu();
+        
+        menu.menuInicial();
+        
     }
 }
