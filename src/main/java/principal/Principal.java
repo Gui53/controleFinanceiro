@@ -1,5 +1,6 @@
 package principal;
 
+import conexao.*;
 import visao.Menu;
 
 /**
@@ -9,9 +10,14 @@ import visao.Menu;
 public class Principal {
 
     public static void main(String[] args) {
-        Menu menu = new Menu();
         
-        menu.menuInicial();
+        ConfiguraBanco.inicializar();
+        
+        Conexao.inicializar();
+        
+        /*Menu menu = new Menu();
+        
+        menu.menuInicial();*/
         
     }
 }
