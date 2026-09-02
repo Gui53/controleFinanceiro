@@ -15,9 +15,9 @@ public class Principal {
         
         Conexao.inicializar();
         
-        /*Menu menu = new Menu();
+        Menu menu = new Menu();
         
-        menu.menuInicial();*/
+        menu.menuInicial();
         
     }
 }

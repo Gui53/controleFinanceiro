@@ -4,6 +4,7 @@
  */
 package visao;
 
+import dao.MovimentacaoDAO;
 import enums.CategoriaEnum;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -17,8 +18,9 @@ public class Menu {
 
     public void menuInicial() {
 
-        CategoriaEnum cEnum;
         Scanner s = new Scanner(System.in);
+        MovimentacaoDAO dao = new MovimentacaoDAO();
+        CategoriaEnum cEnum;
         System.out.println("CONTROLE FINANCEIRO\n\n"
                 + "1 - Registrar gasto");
         int i = s.nextInt();
@@ -40,43 +42,42 @@ public class Menu {
                 int j = s.nextInt();
                 switch (j) {
                     case 1:
-                        cEnum = CategoriaEnum.values()[j-1];
+                        cEnum = CategoriaEnum.values()[j - 1];
 
                         break;
 
                     case 2:
-                        cEnum = CategoriaEnum.values()[j-1];
-
+                        cEnum = CategoriaEnum.values()[j - 1];
 
                         break;
 
                     case 3:
-                        cEnum = CategoriaEnum.values()[j-1];
+                        cEnum = CategoriaEnum.values()[j - 1];
 
                         break;
 
                     case 4:
-                        cEnum = CategoriaEnum.values()[j-1];
+                        cEnum = CategoriaEnum.values()[j - 1];
 
                         break;
 
                     case 5:
-                        cEnum = CategoriaEnum.values()[j-1];
+                        cEnum = CategoriaEnum.values()[j - 1];
 
                         break;
 
                     case 6:
-                        cEnum = CategoriaEnum.values()[j-1];
+                        cEnum = CategoriaEnum.values()[j - 1];
 
                         break;
 
                     case 7:
-                        cEnum = CategoriaEnum.values()[j-1];
+                        cEnum = CategoriaEnum.values()[j - 1];
 
                         break;
 
                     case 8:
-                        cEnum = CategoriaEnum.values()[j-1];
+                        cEnum = CategoriaEnum.values()[j - 1];
 
                         break;
                     default:
@@ -93,13 +94,8 @@ public class Menu {
                 String data = s.next();
                  */
                 Movimentacao mov = new Movimentacao(descricao, valor, quantidade, LocalDate.now(), cEnum);
-                
-                System.out.println("GASTO REGISTRADO: "
-                        + mov.getDescricao() + "\n" 
-                        + mov.getCategoria() + "\n"
-                        + mov.getValorUnitario() + "\n"
-                        + mov.getQuantidade() + "\n"
-                        + mov.getData() + "\n");
+
+                dao.inserir(mov);
                 break;
             default:
                 throw new AssertionError();
