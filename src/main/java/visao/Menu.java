@@ -7,6 +7,7 @@ package visao;
 import dao.MovimentacaoDAO;
 import enums.CategoriaEnum;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import modelo.Movimentacao;
 
@@ -21,6 +22,9 @@ public class Menu {
         Scanner s = new Scanner(System.in);
         MovimentacaoDAO dao = new MovimentacaoDAO();
         CategoriaEnum cEnum;
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
         System.out.println("CONTROLE FINANCEIRO\n\n"
                 + "1 - Registrar gasto");
         int i = s.nextInt();
@@ -28,7 +32,7 @@ public class Menu {
         switch (i) {
             case 1:
                 System.out.println("Descrição:");
-                String descricao = s.next();
+                String descricao = s.nextLine();
 
                 System.out.println("Categoria:\n"
                         + "  1 - ALIMENTAÇÃO,\n"
@@ -90,9 +94,9 @@ public class Menu {
                 System.out.println("Quantidade:");
                 int quantidade = s.nextInt();
 
-                /*System.out.println("Data:");
-                String data = s.next();
-                 */
+                System.out.println("Data:");
+                LocalDate data = LocalDate.parse(s.next(), formatter);
+                 
                 Movimentacao mov = new Movimentacao(descricao, valor, quantidade, LocalDate.now(), cEnum);
 
                 dao.inserir(mov);
