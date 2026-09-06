@@ -16,18 +16,19 @@ import modelo.Movimentacao;
 public class MovimentacaoDAO {
     public boolean inserir(Movimentacao mov){
             String sql = """
-                         INSERT INTO tb_movimentacao(descricao, valor_unitario, quantidade, data, categoria)
-                         VALUES(?, ?, ?, ?, ?)
+                         INSERT INTO tb_movimentacao(tipo_movimentacao, descricao, valor_unitario, quantidade, data, categoria)
+                         VALUES(?, ?, ?, ?, ?, ?)
                          """;
             
             try{
                 PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
                 
-                stmt.setString(1, mov.getDescricao());
-                stmt.setDouble(2, mov.getValorUnitario());
-                stmt.setInt(3, mov.getQuantidade());
-                stmt.setDate(4, java.sql.Date.valueOf(mov.getData()));
-                stmt.setString(5, mov.getCategoria().name());
+                stmt.setString(1, mov.getTipo().name());
+                stmt.setString(2, mov.getDescricao());
+                stmt.setDouble(3, mov.getValorUnitario());
+                stmt.setInt(4, mov.getQuantidade());
+                stmt.setDate(5, java.sql.Date.valueOf(mov.getData()));
+                stmt.setString(6, mov.getCategoria().name());
                 
                 stmt.execute();
                 stmt.close();

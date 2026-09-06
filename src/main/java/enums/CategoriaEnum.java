@@ -12,5 +12,6 @@ public enum CategoriaEnum {
     EDUCAÇÃO,
     SAÚDE,
     ASSINATURA,
+    SALARIO_MENSAL,
     OUTROS
 }

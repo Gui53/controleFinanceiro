@@ -21,10 +21,9 @@ public class ConfiguraBanco {
      * @param user Usuário do banco de dados
      * @param password Senha do banco de dados
      */
-    
     private static final String USER = "root";
-    private static final String PASSWORD = "suaSenha";
-    
+    private static final String PASSWORD = "123456";
+
     public static void inicializar() {
         String url = "jdbc:mysql://localhost:3306/?useTimezone=true&serverTimezone=UTC";
 
@@ -37,15 +36,16 @@ public class ConfiguraBanco {
             stmt.executeUpdate("USE db_controlefinanceiro");
 
             stmt.executeUpdate("""
-                CREATE TABLE IF NOT EXISTS `db_controlefinanceiro`.`tb_movimentacao` (
-                   id INT AUTO_INCREMENT PRIMARY KEY,
-                      descricao VARCHAR(255) NOT NULL,
-                      valor_unitario DECIMAL(10,2) NOT NULL,
-                      quantidade INT NOT NULL,
-                      data DATE NOT NULL,
-                      categoria VARCHAR(50) NOT NULL
-                )ENGINE = InnoDB
-            """);
+            CREATE TABLE IF NOT EXISTS tb_movimentacao (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                tipo_movimentacao VARCHAR(20) NOT NULL,
+                descricao VARCHAR(255) NOT NULL,
+                valor_unitario DECIMAL(10,2) NOT NULL,
+                quantidade INT NOT NULL,
+                categoria VARCHAR(50) NOT NULL,
+                data DATE NOT NULL
+            ) ENGINE = InnoDB
+        """);
 
             System.out.println("Banco de dados inicializado com sucesso!");
 
