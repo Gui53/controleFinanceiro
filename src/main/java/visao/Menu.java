@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package visao;
 
 import dao.MovimentacaoDAO;
@@ -28,7 +24,8 @@ public class Menu {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         
         System.out.println("CONTROLE FINANCEIRO\n\n"
-                + "1 - Registrar movimentação");
+                + "1 - Registrar movimentação\n" 
+                + "2 - Exibir Registros");
         int i = s.nextInt();
 
         switch (i) {
@@ -126,6 +123,11 @@ public class Menu {
                 Movimentacao mov = new Movimentacao(descricao, valor, quantidade, tipo, data, cEnum);
 
                 dao.inserir(mov);
+                break;
+            case 2: 
+                System.out.println("CONSULTA:");
+                dao.listar();
+                
                 break;
             default:
                 throw new AssertionError();
