@@ -20,117 +20,125 @@ public class Menu {
         MovimentacaoDAO dao = new MovimentacaoDAO();
         TipoMov tipo;
         CategoriaEnum cEnum;
-        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
-        System.out.println("CONTROLE FINANCEIRO\n\n"
-                + "1 - Registrar movimentação\n" 
-                + "2 - Exibir Registros");
-        int i = s.nextInt();
 
-        switch (i) {
-            case 1:
-                System.out.println("TIPO DA MOVIMENTAÇÃO:\n"
-                        + "  1 - ENTRADA,\n"
-                        + "  2 - SAÍDA,\n");
-                int k = s.nextInt();
-               
-                switch (k) {
-                    case 1:
-                        tipo = TipoMov.values()[k - 1];
+        int i = 0;
+        while (i != 3) {
+            System.out.println("CONTROLE FINANCEIRO\n\n"
+                    + "1 - Registrar movimentação\n"
+                    + "2 - Exibir Registros\n"
+                    + "3 - Sair");
 
-                        break;
+            i = s.nextInt();
+            switch (i) {
+                case 1:
+                    System.out.println("TIPO DA MOVIMENTAÇÃO:\n"
+                            + "  1 - ENTRADA,\n"
+                            + "  2 - SAÍDA,\n");
+                    int k = s.nextInt();
 
-                    case 2:
-                        tipo = TipoMov.values()[k - 1];
+                    switch (k) {
+                        case 1:
+                            tipo = TipoMov.values()[k - 1];
 
-                        break;
-                    default:
-                        throw new AssertionError();
-                }
-                s.nextLine();
-              
-                System.out.println("Descrição:");
-                String descricao = s.nextLine();
+                            break;
 
-                System.out.println("Categoria:\n"
-                        + "  1 - ALIMENTAÇÃO,\n"
-                        + "  2 - ROUPA,\n"
-                        + "  3 - TRANSPORTE,\n"
-                        + "  4 - LAZER,\n"
-                        + "  5 - EDUCAÇÃO,\n"
-                        + "  6 - SAÚDE,\n"
-                        + "  7 -  ASSINATURA,\n"
-                        + "  8 - SALÁRIO MENSAL\n"
-                        + "  9 -  OUTROS");
-                int j = s.nextInt();
-                switch (j) {
-                    case 1:
-                        cEnum = CategoriaEnum.values()[j - 1];
-                        
-                        break;
-                    case 2:
-                        cEnum = CategoriaEnum.values()[j - 1];
+                        case 2:
+                            tipo = TipoMov.values()[k - 1];
 
-                        break;
+                            break;
+                        default:
+                            throw new AssertionError();
+                    }
+                    s.nextLine();
 
-                    case 3:
-                        cEnum = CategoriaEnum.values()[j - 1];
+                    System.out.println("Descrição:");
+                    String descricao = s.nextLine();
 
-                        break;
+                    System.out.println("Categoria:\n"
+                            + "  1 - ALIMENTAÇÃO,\n"
+                            + "  2 - ROUPA,\n"
+                            + "  3 - TRANSPORTE,\n"
+                            + "  4 - LAZER,\n"
+                            + "  5 - EDUCAÇÃO,\n"
+                            + "  6 - SAÚDE,\n"
+                            + "  7 -  ASSINATURA,\n"
+                            + "  8 - SALÁRIO MENSAL\n"
+                            + "  9 -  OUTROS");
+                    int j = s.nextInt();
+                    switch (j) {
+                        case 1:
+                            cEnum = CategoriaEnum.values()[j - 1];
 
-                    case 4:
-                        cEnum = CategoriaEnum.values()[j - 1];
+                            break;
+                        case 2:
+                            cEnum = CategoriaEnum.values()[j - 1];
 
-                        break;
+                            break;
 
-                    case 5:
-                        cEnum = CategoriaEnum.values()[j - 1];
+                        case 3:
+                            cEnum = CategoriaEnum.values()[j - 1];
 
-                        break;
+                            break;
 
-                    case 6:
-                        cEnum = CategoriaEnum.values()[j - 1];
+                        case 4:
+                            cEnum = CategoriaEnum.values()[j - 1];
 
-                        break;
+                            break;
 
-                    case 7:
-                        cEnum = CategoriaEnum.values()[j - 1];
+                        case 5:
+                            cEnum = CategoriaEnum.values()[j - 1];
 
-                        break;
+                            break;
 
-                    case 8:
-                        cEnum = CategoriaEnum.values()[j - 1];
+                        case 6:
+                            cEnum = CategoriaEnum.values()[j - 1];
 
-                        break;
+                            break;
 
-                    case 9:
-                        cEnum = CategoriaEnum.values()[j - 1];
+                        case 7:
+                            cEnum = CategoriaEnum.values()[j - 1];
 
-                        break;
-                    default:
-                        throw new AssertionError();
-                }
-                System.out.println("Valor:");
-                double valor = s.nextDouble();
+                            break;
 
-                System.out.println("Quantidade:");
-                int quantidade = s.nextInt();
+                        case 8:
+                            cEnum = CategoriaEnum.values()[j - 1];
 
-                System.out.println("Data:");
-                LocalDate data = LocalDate.parse(s.next(), formatter);
-                 
-                Movimentacao mov = new Movimentacao(descricao, valor, quantidade, tipo, data, cEnum);
+                            break;
 
-                dao.inserir(mov);
-                break;
-            case 2: 
-                System.out.println("CONSULTA:");
-                dao.listar();
-                
-                break;
-            default:
-                throw new AssertionError();
+                        case 9:
+                            cEnum = CategoriaEnum.values()[j - 1];
+
+                            break;
+                        default:
+                            throw new AssertionError();
+                    }
+                    System.out.println("Valor:");
+                    double valor = s.nextDouble();
+
+                    System.out.println("Quantidade:");
+                    int quantidade = s.nextInt();
+
+                    System.out.println("Data:");
+                    LocalDate data = LocalDate.parse(s.next(), formatter);
+
+                    Movimentacao mov = new Movimentacao(descricao, valor, quantidade, tipo, data, cEnum);
+
+                    dao.inserir(mov);
+                    break;
+                case 2:
+                    System.out.println("CONSULTA:");
+                    dao.listar();
+
+                    break;
+
+                case 3:
+                    System.out.println("SAINDO DO SISTEMA...");
+                    System.out.println("SISTEMA DESLIGADO!");
+                    break;
+                default:
+                    System.out.println("Número inválido");                 
+            }
         }
     }
 
