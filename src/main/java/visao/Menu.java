@@ -51,7 +51,8 @@ public class Menu {
                     default:
                         throw new AssertionError();
                 }
-                
+                s.nextLine();
+              
                 System.out.println("Descrição:");
                 String descricao = s.nextLine();
 
@@ -122,7 +123,7 @@ public class Menu {
                 System.out.println("Data:");
                 LocalDate data = LocalDate.parse(s.next(), formatter);
                  
-                Movimentacao mov = new Movimentacao(descricao, valor, quantidade, tipo, LocalDate.now(), cEnum);
+                Movimentacao mov = new Movimentacao(descricao, valor, quantidade, tipo, data, cEnum);
 
                 dao.inserir(mov);
                 break;
