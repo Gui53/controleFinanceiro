@@ -23,12 +23,13 @@ public class Menu {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         int i = 0;
-        while (i != 4) {
+        while (i != 5) {
             System.out.println("CONTROLE FINANCEIRO\n\n"
                     + "1 - Registrar movimentação\n"
                     + "2 - Exibir Registros\n"
                     + "3 - Editar Registro\n"
-                    + "4 - Sair");
+                    + "4 - Deletar movimentação\n" 
+                    + "5 - Sair do sistema");
 
             i = s.nextInt();
             switch (i) {
@@ -234,6 +235,20 @@ public class Menu {
 
                     break;
                 case 4:
+                    System.out.println("Digite o id da movimentação que deseja excluir:");
+                    int idExcluir = s.nextInt();
+                    s.nextLine();
+                    
+                    System.out.println("Tem certeza que deseja excluir essa movimentação?(S/N)");
+                    String confirmacao = s.nextLine();
+                    
+                    if(confirmacao.equalsIgnoreCase("S")){
+                        dao.deletar(idExcluir);
+                    }else{
+                        System.out.println("Exclusão cancelada!");
+                    }
+                    break;
+                case 5:
                     System.out.println("SAINDO DO SISTEMA...");
                     System.out.println("SISTEMA DESLIGADO!");
                     break;
