@@ -85,6 +85,56 @@ public class MovimentacaoDAO {
         }
     }
 
+    public boolean existe(int id) {
+        String sql = """
+                     SELECT id FROM tb_movimentacao
+                     WHERE id = ?;
+                     """;
+
+        try {
+
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+
+            stmt.setInt(1, id);
+            ResultSet resultado = stmt.executeQuery();
+
+            return resultado.next();
+        } catch (SQLException e) {
+            System.out.println("ERRO: " + e);
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public boolean deletar(int id) {
+
+        String sql = """
+                     DELETE FROM tb_movimentacao 
+                     WHERE id = ?;
+                     """;
+        try {
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+
+            stmt.setInt(1, id);
+
+            int linhasAlteradas = stmt.executeUpdate();
+
+            stmt.close();
+
+            if (linhasAlteradas > 0) {
+                System.out.println("MOVIMENTAÇÃO EXCLUÍDA!");
+                return true;
+            }
+
+            System.out.println("Não existe movimentação com esse ID.");
+            return false;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public void listar() {
         String sql = """
                      SELECT * FROM tb_movimentacao;
