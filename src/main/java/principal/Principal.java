@@ -1,7 +1,9 @@
 package principal;
 
 import conexao.*;
+import javax.swing.SwingUtilities;
 import visao.Menu;
+import visao.TelaPrincipal;
 
 /**
  *
@@ -10,14 +12,12 @@ import visao.Menu;
 public class Principal {
 
     public static void main(String[] args) {
-        
+
         ConfiguraBanco.inicializar();
-        
+
         Conexao.inicializar();
-        
-        Menu menu = new Menu();
-        
-        menu.menuInicial();
-        
+
+        SwingUtilities.invokeLater(() -> new TelaPrincipal().setVisible(true));
+
     }
 }
