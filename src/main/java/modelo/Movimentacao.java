@@ -13,19 +13,17 @@ public class Movimentacao {
     private int id;
     private String descricao;
     private double valorUnitario;
-    private int quantidade;
     private TipoMov tipo;
     private LocalDate data;
     private CategoriaEnum categoria;
 
     public Movimentacao() {
-        this("", 0.0, 0, null, LocalDate.now() , null);
+        this("", 0.0, null, LocalDate.now() , null);
     }
     
-    public Movimentacao(String descricao, double valorUnitario, int quantidade, TipoMov tipo, LocalDate data, CategoriaEnum categoria) {
+    public Movimentacao(String descricao, double valorUnitario, TipoMov tipo, LocalDate data, CategoriaEnum categoria) {
         this.descricao = descricao;
         this.valorUnitario = valorUnitario;
-        this.quantidade = quantidade;
         this.tipo = tipo;
         this.data = data;
         this.categoria = categoria;
@@ -49,14 +47,6 @@ public class Movimentacao {
 
     public void setValorUnitario(double valorUnitario) {
         this.valorUnitario = valorUnitario;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
     }
 
     public LocalDate getData() {

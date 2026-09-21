@@ -41,7 +41,6 @@ public class ConfiguraBanco {
                 tipo_movimentacao VARCHAR(20) NOT NULL,
                 descricao VARCHAR(255) NOT NULL,
                 valor_unitario DECIMAL(10,2) NOT NULL,
-                quantidade INT NOT NULL,
                 categoria VARCHAR(50) NOT NULL,
                 data DATE NOT NULL
             ) ENGINE = InnoDB

@@ -118,13 +118,10 @@ public class Menu {
                     System.out.println("Valor:");
                     double valor = s.nextDouble();
 
-                    System.out.println("Quantidade:");
-                    int quantidade = s.nextInt();
-
                     System.out.println("Data:");
                     LocalDate data = LocalDate.parse(s.next(), formatter);
 
-                    Movimentacao mov = new Movimentacao(descricao, valor, quantidade, tipo, data, cEnum);
+                    Movimentacao mov = new Movimentacao(descricao, valor, tipo, data, cEnum);
 
                     dao.inserir(mov);
                     break;
@@ -223,13 +220,10 @@ public class Menu {
                     System.out.println("Valor:");
                     double valorUpdate = s.nextDouble();
 
-                    System.out.println("Quantidade:");
-                    int quantidadeUpdate = s.nextInt();
-
                     System.out.println("Data:");
                     LocalDate dataUpdate = LocalDate.parse(s.next(), formatter);
 
-                    Movimentacao movUpdate = new Movimentacao(descricaoUpdate, valorUpdate, quantidadeUpdate, tipo, dataUpdate, cEnum);
+                    Movimentacao movUpdate = new Movimentacao(descricaoUpdate, valorUpdate, tipo, dataUpdate, cEnum);
 
                     dao.editar(id, movUpdate);
 

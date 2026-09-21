@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import conexao.Conexao;
@@ -22,8 +18,8 @@ public class MovimentacaoDAO {
     public boolean inserir(Movimentacao mov) {
 
         String sql = """
-                         INSERT INTO tb_movimentacao(tipo_movimentacao, descricao, valor_unitario, quantidade, data, categoria)
-                         VALUES(?, ?, ?, ?, ?, ?)
+                         INSERT INTO tb_movimentacao(tipo_movimentacao, descricao, valor_unitario, data, categoria)
+                         VALUES(?, ?, ?, ?, ?)
                          """;
 
         try {
@@ -32,9 +28,8 @@ public class MovimentacaoDAO {
             stmt.setString(1, mov.getTipo().name());
             stmt.setString(2, mov.getDescricao());
             stmt.setDouble(3, mov.getValorUnitario());
-            stmt.setInt(4, mov.getQuantidade());
-            stmt.setDate(5, java.sql.Date.valueOf(mov.getData()));
-            stmt.setString(6, mov.getCategoria().name());
+            stmt.setDate(4, java.sql.Date.valueOf(mov.getData()));
+            stmt.setString(5, mov.getCategoria().name());
 
             stmt.execute();
             stmt.close();
@@ -53,7 +48,7 @@ public class MovimentacaoDAO {
 
         String sql = """
                      UPDATE tb_movimentacao
-                     SET tipo_movimentacao = ?, descricao = ?, valor_unitario = ?, quantidade = ?, categoria = ?, data = ?
+                     SET tipo_movimentacao = ?, descricao = ?, valor_unitario = ?, categoria = ?, data = ?
                      WHERE id = ?;
                      """;
 
@@ -63,10 +58,9 @@ public class MovimentacaoDAO {
             stmt.setString(1, mov.getTipo().name());
             stmt.setString(2, mov.getDescricao());
             stmt.setDouble(3, mov.getValorUnitario());
-            stmt.setInt(4, mov.getQuantidade());
-            stmt.setString(5, mov.getCategoria().name());
-            stmt.setDate(6, java.sql.Date.valueOf(mov.getData()));
-            stmt.setInt(7, id);
+            stmt.setString(4, mov.getCategoria().name());
+            stmt.setDate(5, java.sql.Date.valueOf(mov.getData()));
+            stmt.setInt(6, id);
 
             int linhasAlteradas = stmt.executeUpdate();
             stmt.close();
@@ -149,7 +143,6 @@ public class MovimentacaoDAO {
                 int id = resultado.getInt("id");
                 String descricao = resultado.getString("descricao");
                 double valor = resultado.getDouble("valor_unitario");
-                int qtd = resultado.getInt("quantidade");
                 LocalDate data = resultado.getDate("data").toLocalDate();
                 String tipoMov = resultado.getString("tipo_movimentacao");
                 String categoria = resultado.getString("categoria");
@@ -158,7 +151,6 @@ public class MovimentacaoDAO {
                 System.out.println("Tipo: " + tipoMov);
                 System.out.println("Descrição: " + descricao);
                 System.out.println("Valor: " + valor);
-                System.out.println("Quantidade: " + qtd);
                 System.out.println("Categoria: " + categoria);
                 System.out.println("Data: " + data);
                 System.out.println("-------------------------");
