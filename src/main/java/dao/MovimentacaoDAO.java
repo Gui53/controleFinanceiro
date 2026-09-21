@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import modelo.Movimentacao;
 
 /**
@@ -159,6 +161,75 @@ public class MovimentacaoDAO {
             resultado.close();
             stmt.close();
 
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+            throw new RuntimeException(e);
+        }
+    }
+    
+    // a JTable da tela Swing. Reaproveita a mesma query do listar().
+    public List<Movimentacao> listarObjetos() {
+        String sql = """
+                     SELECT * FROM tb_movimentacao ORDER BY id;
+                     """;
+        List<Movimentacao> lista = new ArrayList<>();
+ 
+        try {
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+ 
+            while (resultado.next()) {
+                Movimentacao mov = new Movimentacao(
+                        resultado.getInt("id"),
+                        resultado.getString("descricao"),
+                        resultado.getDouble("valor_unitario"),
+                        TipoMov.valueOf(resultado.getString("tipo_movimentacao")),
+                        resultado.getDate("data").toLocalDate(),
+                        CategoriaEnum.valueOf(resultado.getString("categoria"))
+                );
+                lista.add(mov);
+            }
+            resultado.close();
+            stmt.close();
+ 
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+            throw new RuntimeException(e);
+        }
+ 
+        return lista;
+    }
+ 
+    // Novo: necessário para pré-preencher o formulário de edição com os dados
+    // atuais do registro selecionado na tabela.
+    public Movimentacao buscarPorId(int id) {
+        String sql = """
+                     SELECT * FROM tb_movimentacao WHERE id = ?;
+                     """;
+ 
+        try {
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet resultado = stmt.executeQuery();
+ 
+            if (resultado.next()) {
+                Movimentacao mov = new Movimentacao(
+                        resultado.getInt("id"),
+                        resultado.getString("descricao"),
+                        resultado.getDouble("valor_unitario"),
+                        TipoMov.valueOf(resultado.getString("tipo_movimentacao")),
+                        resultado.getDate("data").toLocalDate(),
+                        CategoriaEnum.valueOf(resultado.getString("categoria"))
+                );
+                resultado.close();
+                stmt.close();
+                return mov;
+            }
+ 
+            resultado.close();
+            stmt.close();
+            return null;
+ 
         } catch (SQLException e) {
             System.out.println("Erro: " + e);
             throw new RuntimeException(e);
