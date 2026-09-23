@@ -2,7 +2,6 @@ package principal;
 
 import conexao.*;
 import javax.swing.SwingUtilities;
-import visao.Menu;
 import visao.TelaPrincipal;
 
 /**
